@@ -20,7 +20,10 @@ COPY nginx.conf /etc/nginx/nginx.conf
 RUN cat /etc/nginx/nginx.conf
 
 # Copy build output from the previous stage
-COPY --from=build /usr/src/app/dist/client /usr/share/nginx/html
+#COPY --from=build /usr/src/app/dist/client /usr/share/nginx/html
+
+COPY --from=builder /app/dist/client/browser/ /usr/share/nginx/html/
+RUN ls -l /usr/share/nginx/html/
 
 # Expose port and run nginx
 EXPOSE 80
